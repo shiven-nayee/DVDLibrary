@@ -76,14 +76,14 @@ public class DVDLibraryController {
         view.displayCreateSuccessBanner();
     }
 
-    void removeDVD() {
+    void removeDVD() throws DVDLibraryDaoException {
         view.displayRemoveDVDBanner();
         String title = view.getDVDTitle();
         DVD removedDVD = dao.removeDVD(title);
         view.displayRemoveResult(removedDVD);
     }
 
-    void editDVDInformation() {
+    void editDVDInformation() throws DVDLibraryDaoException {
         view.displayEditDVDBanner();
 //        String title = view.getDVDTitle();
 //        DVD dvdForEditing = dao.getDVD(title);
@@ -94,20 +94,20 @@ public class DVDLibraryController {
 //        view.displayEditResult(editedDVD);
     }
 
-    void listDVDs() {
+    void listDVDs() throws DVDLibraryDaoException {
         view.displayDisplayAllBanner();
         List<DVD> dvdList = dao.listDVDs();
         view.displayDVDList(dvdList);
     }
 
-    void displayDVDInformation() {
+    void displayDVDInformation() throws DVDLibraryDaoException {
         view.displayDisplayDVDBanner();
         String title = view.getDVDTitle();
         DVD dvd = dao.getDVD(title);
         view.displayDVD(dvd);
     }
 
-    void searchDVDByTitle() {
+    void searchDVDByTitle() throws DVDLibraryDaoException {
         view.displaySearchDVDBanner();
         String title = view.getDVDTitle();
         if (dao.searchDVD(title)) {

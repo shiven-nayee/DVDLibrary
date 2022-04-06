@@ -10,15 +10,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.mthree.dvdlibrary.dto.DVD;
+import java.util.Collection;
 
 /**
  *
@@ -26,51 +25,62 @@ import com.mthree.dvdlibrary.dto.DVD;
  */
 public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
-    public static final String DVD_FILE = "DVDs.txt";
+    public static final String DVD_FILE = "DVD.txt";
     public static final String DELIMITER = "::";
 
     private Map<String, DVD> DVDLibrary = new HashMap<>();
 
     @Override
-    public DVD addDVD(DVD d) {
+    public DVD addDVD(DVD d) throws DVDLibraryDaoException {
+        loadDVD();
         DVDLibrary.put(d.getTitle(), d);
+        writeDVDs();
         return d;
     }
 
     @Override
-    public List<DVD> listDVDs() {
-        System.out.println("DVDs in the list");
-        Set<String> AllTitles = DVDLibrary.keySet();
-        for(String title : AllTitles) {
-            System.out.println(title);
-        }
-        return null;
+    public List<DVD> listDVDs() throws DVDLibraryDaoException {
+        loadDVD();
+
+//        System.out.println("DVDs in the list");
+        Collection<DVD> allDvds = DVDLibrary.values();
+//        for(String title : AllTitles) {
+//            System.out.println(title);
+//        }
+        return new ArrayList(allDvds);
     }
 
     @Override
-    public DVD getDVD(String title) {
+    public DVD getDVD(String title) throws DVDLibraryDaoException {
+        loadDVD();
         return DVDLibrary.get(title);
     }
 
     @Override
-    public DVD removeDVD(String title) {
-        return DVDLibrary.remove(title);
+    public DVD removeDVD(String title) throws DVDLibraryDaoException {
+        loadDVD();
+        DVD removedDvd = DVDLibrary.remove(title);
+        writeDVDs();
+        return removedDvd;
     }
 
     @Override
-    public boolean searchDVD(String title) {
+    public boolean searchDVD(String title) throws DVDLibraryDaoException {
+        loadDVD();
         return DVDLibrary.containsKey(title);
     }
 
     @Override
-    public DVD editDVD(String title, DVD newInfo) {
+    public DVD editDVD(String title, DVD newInfo) throws DVDLibraryDaoException {
+        loadDVD();
         removeDVD(title);
         addDVD(newInfo);
         return null;
     }
 
     @Override
-    public void getDVDInformation(String title) {
+    public void getDVDInformation(String title) throws DVDLibraryDaoException {
+        loadDVD();
         DVD d = DVDLibrary.get(title);
         System.out.println("Title: " + d.getTitle());
         System.out.println("Director: " + d.getDirectorName());
@@ -162,7 +172,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
                 dvdFromFile = unmarshallDVD(currentLine);
 
                 // Put dvd into the map using DVD title as the key
-//                dvds.put(dvdFromFile.getTitle(), dvdFromFile);
+                DVDLibrary.put(dvdFromFile.getTitle(), dvdFromFile);
             }
         } catch (FileNotFoundException e) {
             throw new DVDLibraryDaoException(
@@ -179,10 +189,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
         try ( PrintWriter out = new PrintWriter(new FileWriter(DVD_FILE))) {
             // Write out the dvd objects to the dvd file.
             String dvdAsText;
-//            List<DVD> dvdList = this.getAllDVDs();
-            // for testing
-            // SHOULD REMOVE ....
-            List<DVD> dvdList = new ArrayList<>();
+            List<DVD> dvdList = listDVDs();
 
             for (DVD aDVD : dvdList) {
                 // turn a Student into a String

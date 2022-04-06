@@ -14,22 +14,22 @@ import com.mthree.dvdlibrary.dto.DVD;
  */
 public interface DVDLibraryDao {
     // Adds a DVD to the library
-    DVD addDVD(DVD d);
-    
+    DVD addDVD(DVD d) throws DVDLibraryDaoException;
+
     // Remove DVD
-    DVD removeDVD(String title);
+    DVD removeDVD(String title) throws DVDLibraryDaoException;
 
     // Edit DVD information
-    DVD editDVD(String title, DVD newInfo);
+    DVD editDVD(String title, DVD newInfo) throws DVDLibraryDaoException;
 
     // Returns all the DVDS
-    List<DVD> listDVDs();
-    
-    // Returns one DVD
-    DVD getDVD(String title);
-    
-    // Search if DVD exists
-    boolean searchDVD(String title);
+    List<DVD> listDVDs() throws DVDLibraryDaoException;
 
-    void getDVDInformation(String title);
+    // Returns one DVD
+    DVD getDVD(String title) throws DVDLibraryDaoException;
+
+    // Search if DVD exists
+    boolean searchDVD(String title) throws DVDLibraryDaoException;
+
+    void getDVDInformation(String title) throws DVDLibraryDaoException;
 }
