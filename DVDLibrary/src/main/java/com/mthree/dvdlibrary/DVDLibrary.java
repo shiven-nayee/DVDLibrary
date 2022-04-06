@@ -5,6 +5,8 @@
 
 package com.mthree.dvdlibrary;
 
+import com.mthree.dvdlibrary.controller.DVDLibraryController;
+
 /**
  *
  * @author Jeonghoon
@@ -12,6 +14,8 @@ package com.mthree.dvdlibrary;
 public class DVDLibrary {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        DVDLibraryController controller = new DVDLibraryController();
+
+        controller.run();
     }
 }
