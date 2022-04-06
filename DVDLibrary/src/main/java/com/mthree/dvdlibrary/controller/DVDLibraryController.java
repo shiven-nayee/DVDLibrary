@@ -6,11 +6,8 @@ package com.mthree.dvdlibrary.controller;
 
 import com.mthree.dvdlibrary.dao.DVDLibraryDao;
 import com.mthree.dvdlibrary.dao.DVDLibraryDaoException;
-import com.mthree.dvdlibrary.dao.DVDLibraryDaoFileImpl;
 import com.mthree.dvdlibrary.dto.DVD;
 import com.mthree.dvdlibrary.ui.DVDLibraryView;
-import com.mthree.dvdlibrary.ui.UserIO;
-import com.mthree.dvdlibrary.ui.UserIOConsoleImpl;
 import java.util.List;
 
 /**
@@ -19,10 +16,13 @@ import java.util.List;
  */
 public class DVDLibraryController {
 
-    // for testing
-    UserIO io = new UserIOConsoleImpl();
-    DVDLibraryDao dao = new DVDLibraryDaoFileImpl();
-    DVDLibraryView view = new DVDLibraryView();
+    DVDLibraryDao dao;
+    DVDLibraryView view;
+
+    public DVDLibraryController(DVDLibraryDao dao, DVDLibraryView view) {
+        this.dao = dao;
+        this.view = view;
+    }
 
     public void run() {
         boolean keepGoing = true;

@@ -6,6 +6,11 @@
 package com.mthree.dvdlibrary;
 
 import com.mthree.dvdlibrary.controller.DVDLibraryController;
+import com.mthree.dvdlibrary.dao.DVDLibraryDao;
+import com.mthree.dvdlibrary.dao.DVDLibraryDaoFileImpl;
+import com.mthree.dvdlibrary.ui.DVDLibraryView;
+import com.mthree.dvdlibrary.ui.UserIO;
+import com.mthree.dvdlibrary.ui.UserIOConsoleImpl;
 
 /**
  *
@@ -14,7 +19,11 @@ import com.mthree.dvdlibrary.controller.DVDLibraryController;
 public class DVDLibrary {
 
     public static void main(String[] args) {
-        DVDLibraryController controller = new DVDLibraryController();
+        UserIO consoleIo = new UserIOConsoleImpl();
+        DVDLibraryView view = new DVDLibraryView(consoleIo);
+        DVDLibraryDao dao = new DVDLibraryDaoFileImpl();
+
+        DVDLibraryController controller = new DVDLibraryController(dao, view);
 
         controller.run();
     }
