@@ -75,7 +75,7 @@ public class DVDLibraryView {
         io.readString("Please hit enter to continue.");
     }
 
-    public int displayEditDVDMenu() {
+    public DVD displayEditDVDMenu(DVD dvdForEditing) {
         io.print("Edit Menu");
         io.print("1. Change Title");
         io.print("2. Change Release Date");
@@ -85,7 +85,20 @@ public class DVDLibraryView {
         io.print("6. Change User Rating");
         io.print("7. Exit");
 
-        return io.readInt("Please select from the above choices.", 1, 7);
+        int userChoice = io.readInt("Please select from the above choices.", 1, 7);
+
+        switch (userChoice) {
+            case 1:
+                String title = io.readString("Please enter new title");
+                dvdForEditing.setTitle(title);
+                break;
+        }
+
+        return dvdForEditing;
+    }
+
+    public String getUpdatedTitle() {
+        return io.readString("Please enter new title.");
     }
 
     public void displayCreateDVDBanner() {

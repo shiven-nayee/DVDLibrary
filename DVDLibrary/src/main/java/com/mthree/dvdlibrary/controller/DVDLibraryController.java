@@ -85,12 +85,16 @@ public class DVDLibraryController {
 
     void editDVDInformation() throws DVDLibraryDaoException {
         view.displayEditDVDBanner();
-//        String title = view.getDVDTitle();
-//        DVD dvdForEditing = dao.getDVD(title);
-//
-//        view.displayEditDVDMenu();
-//        // prompt for options
-//
+        String title = view.getDVDTitle();
+        DVD dvdForEditing = dao.getDVD(title);
+
+        view.displayDVD(dvdForEditing);
+        view.displayEditDVDMenu(dvdForEditing);
+        // prompt for options
+
+        dao.removeDVD(title);
+        dao.addDVD(dvdForEditing);
+
 //        view.displayEditResult(editedDVD);
     }
 
