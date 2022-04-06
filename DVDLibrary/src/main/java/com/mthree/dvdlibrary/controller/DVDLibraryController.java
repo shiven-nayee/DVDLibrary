@@ -116,11 +116,8 @@ public class DVDLibraryController {
     void searchDVDByTitle() throws DVDLibraryDaoException {
         view.displaySearchDVDBanner();
         String title = view.getDVDTitle();
-        if (dao.searchDVD(title)) {
-            System.out.println("Exist");
-        } else {
-            System.out.println("We don't have it");
-        }
+        DVD dvd = dao.getDVD(title);
+        view.displaySearchDVDResult(dvd);
     }
 
     private void unknownCommand() {
