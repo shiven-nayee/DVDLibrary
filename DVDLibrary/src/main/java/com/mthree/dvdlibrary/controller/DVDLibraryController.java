@@ -89,13 +89,15 @@ public class DVDLibraryController {
         DVD dvdForEditing = dao.getDVD(title);
 
         view.displayDVD(dvdForEditing);
-        view.displayEditDVDMenu(dvdForEditing);
-        // prompt for options
+        boolean isUpdated = view.displayEditDVDMenu(dvdForEditing);
 
-        dao.removeDVD(title);
-        dao.addDVD(dvdForEditing);
-
-//        view.displayEditResult(editedDVD);
+        if (isUpdated) {
+            dao.removeDVD(title);
+            dao.addDVD(dvdForEditing);
+            view.displayEditResult(dvdForEditing);
+        } else {
+            view.displayEditDVDMenu(null);
+        }
     }
 
     void listDVDs() throws DVDLibraryDaoException {

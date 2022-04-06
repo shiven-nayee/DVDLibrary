@@ -74,7 +74,7 @@ public class DVDLibraryView {
         io.readString("Please hit enter to continue.");
     }
 
-    public DVD displayEditDVDMenu(DVD dvdForEditing) {
+    public int printEditMenuAndGetSelection() {
         io.print("Edit Menu");
         io.print("1. Change Title");
         io.print("2. Change Release Date");
@@ -82,18 +82,60 @@ public class DVDLibraryView {
         io.print("4. Change Director Name");
         io.print("5. Change Studio");
         io.print("6. Change User Rating");
-        io.print("7. Exit");
+        io.print("7. Save & Exit");
+        io.print("8. Exit without save");
 
-        int userChoice = io.readInt("Please select from the above choices.", 1, 7);
+        return io.readInt("Please select from the above choices.", 1, 8);
+    }
 
-        switch (userChoice) {
-            case 1:
-                String title = io.readString("Please enter new title");
-                dvdForEditing.setTitle(title);
-                break;
+    public boolean displayEditDVDMenu(DVD dvdForEditing) {
+        boolean keepGoing = true;
+
+        int userChoice = 8;
+        while (keepGoing) {
+            userChoice = printEditMenuAndGetSelection();
+
+            switch (userChoice) {
+                case 1:
+                    io.print("Old title: " + dvdForEditing.getTitle());
+                    String newTitle = io.readString("Please enter new title");
+                    dvdForEditing.setTitle(newTitle);
+                    break;
+                case 2:
+                    io.print("Old release: " + dvdForEditing.getReleaseDate());
+                    String newDate = io.readString("Please enter new release date");
+                    dvdForEditing.setReleaseDate(newDate);
+                    break;
+                case 3:
+                    io.print("Old MPAA rating: " + dvdForEditing.getRating());
+                    String newRating = io.readString("Please enter new rating");
+                    dvdForEditing.setRating(newRating);
+                    break;
+                case 4:
+                    io.print("Old director's name: " + dvdForEditing.getDirectorName());
+                    String newDirector = io.readString("Please enter new director name");
+                    dvdForEditing.setTitle(newDirector);
+                    break;
+                case 5:
+                    io.print("Old studio: " + dvdForEditing.getStudio());
+                    String newStudio = io.readString("Please enter new studio");
+                    dvdForEditing.setStudio(newStudio);
+                    break;
+                case 6:
+                    io.print("Old user note: " + dvdForEditing.getUserRating());
+                    String newUserRating = io.readString("Please enter new user rating");
+                    dvdForEditing.setUserRating(newUserRating);
+                    break;
+                case 7:
+                case 8:
+                    keepGoing = false;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        return dvdForEditing;
+        return userChoice == 7;     // 7 : Save changes and Exit
     }
 
     public String getUpdatedTitle() {
