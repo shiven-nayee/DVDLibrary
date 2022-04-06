@@ -14,7 +14,7 @@ import java.util.List;
 public class DVD {
 
     private String title;           // KEY
-    private Date releaseDate;
+    private String releaseDate;
     private String rating;
     private String directorName;
     private String studio;
@@ -32,11 +32,11 @@ public class DVD {
         this.title = title;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
