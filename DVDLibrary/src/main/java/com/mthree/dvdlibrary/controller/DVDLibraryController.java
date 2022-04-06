@@ -4,53 +4,67 @@
  */
 package com.mthree.dvdlibrary.controller;
 
+import com.mthree.dvdlibrary.dao.DVDLibraryDaoException;
+import com.mthree.dvdlibrary.ui.UserIO;
+import com.mthree.dvdlibrary.ui.UserIOConsoleImpl;
+
 /**
  *
  * @author Jeonghoon
  */
 public class DVDLibraryController {
 
+    // for testing
+    UserIO io = new UserIOConsoleImpl();
+
     public void run() {
         boolean keepGoing = true;
         int menuSelection;
 
-        while (keepGoing) {
-            menuSelection = getMenuSelection();
+        try {
+            while (keepGoing) {
+                menuSelection = getMenuSelection();
 
-            switch (menuSelection) {
-                case 1:
-                    addDVD();
-                    break;
-                case 2:
-                    removeDVD();
-                    break;
-                case 3:
-                    editDVDInformation();
-                    break;
-                case 4:
-                    listDVDs();
-                    break;
-                case 5:
-                    displayDVDInformation();
-                    break;
-                case 6:
-                    searchDVDByTitle();
-                    break;
-                case 7:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
+                switch (menuSelection) {
+                    case 1:
+                        addDVD();
+                        break;
+                    case 2:
+                        removeDVD();
+                        break;
+                    case 3:
+                        editDVDInformation();
+                        break;
+                    case 4:
+                        listDVDs();
+                        break;
+                    case 5:
+                        displayDVDInformation();
+                        break;
+                    case 6:
+                        searchDVDByTitle();
+                        break;
+                    case 7:
+                        keepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
             }
+            exitMessage();
+        } catch (DVDLibraryDaoException e) {
+            System.out.println(e.getMessage());
         }
-        exitMessage();
     }
 
     int getMenuSelection() {
-        return 10;
+//        return 10;
+        // for testing
+        return io.readInt("please enter input");
     }
 
-    void addDVD() {
+    // for exception testing.
+    void addDVD() throws DVDLibraryDaoException {
         System.out.println("ADD DVD");
     }
 

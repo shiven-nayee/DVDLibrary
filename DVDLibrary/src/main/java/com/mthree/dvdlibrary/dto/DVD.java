@@ -4,9 +4,6 @@
  */
 package com.mthree.dvdlibrary.dto;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  *
  * @author Jeonghoon
