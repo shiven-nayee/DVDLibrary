@@ -4,11 +4,22 @@
  */
 package com.mthree.dvdlibrary.controller;
 
+import com.mthree.dvdlibrary.dao.DVDLibraryDao;
+import com.mthree.dvdlibrary.dto.DVD;
+import com.mthree.dvdlibrary.ui.DVDLibraryView;
+
 /**
  *
  * @author Jeonghoon
  */
 public class DVDLibraryController {
+    private DVDLibraryView view;
+    private DVDLibraryDao dao;
+
+    public DVDLibraryController(DVDLibraryDao dao, DVDLibraryView view) {
+        this.dao = dao;
+        this.view = view;
+    }
 
     public void run() {
         boolean keepGoing = true;
@@ -46,39 +57,50 @@ public class DVDLibraryController {
         exitMessage();
     }
 
+
     int getMenuSelection() {
-        return 10;
+        return view.printMenuAndGetSelection();
     }
 
-    void addDVD() {
-        System.out.println("ADD DVD");
+    private void addDVD() {
+        view.displayCreateDVDBanner();
+        DVD newDVD = view.getNewDVDInfo();
+        view.displayCreateSuccessBanner();
     }
 
-    void removeDVD() {
-        System.out.println("REMOVE DVE");
+    private void removeDVD() {
+        view.displayRemoveDVDBanner();
+        String title = view.getDVDTitle();
+//        view.displayRemoveResult(removedDVD);
     }
 
-    void editDVDInformation() {
-        System.out.println("EDIT DVD INFO.");
+    private void editDVDInformation() {
+        view.displayEditDVDBanner();
+        String title = view.getDVDTitle();
+//        view.displayEditResult(editedDVD);
     }
 
     void listDVDs() {
-        System.out.println("LIST DVDs");
+        view.displayDisplayAllBanner();
+//        List<DVD> dvdList = dao.getAllDVDs();
+//        view.displayDVDList(dvdList);
     }
 
     void displayDVDInformation() {
-        System.out.println("DISPLAY DVD");
+        view.displayDisplayDVDBanner();
+        String title = view.getDVDTitle();
     }
 
     void searchDVDByTitle() {
-        System.out.println("Search DVD");
+        view.displaySearchDVDBanner();
+        String title = view.getDVDTitle();
     }
 
     private void unknownCommand() {
-        System.out.println("Unknown Command");
+        view.displayUnknownCommandBanner();
     }
 
     private void exitMessage() {
-        System.out.println("Bye!!!");
+        view.displayExitBanner();
     }
 }
