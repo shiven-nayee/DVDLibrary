@@ -70,10 +70,16 @@ public class DVDLibraryController {
 
     // for exception testing.
     void addDVD() throws DVDLibraryDaoException {
-        view.displayCreateDVDBanner();
-        DVD newDVD = view.getNewDVDInfo();
-        dao.addDVD(newDVD);
-        view.displayCreateSuccessBanner();
+        boolean keepGoing = true;
+
+        while (keepGoing) {
+            view.displayCreateDVDBanner();
+            DVD newDVD = view.getNewDVDInfo();
+            dao.addDVD(newDVD);
+            view.displayCreateSuccessBanner();
+
+            keepGoing = view.doContinue("Press 'Y' or 'y' to add more DVD");
+        }
     }
 
     void removeDVD() throws DVDLibraryDaoException {
