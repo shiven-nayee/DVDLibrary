@@ -4,8 +4,7 @@
  */
 package com.mthree.dvdlibrary.dto;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.util.List;
 public class DVD {
 
     private String title;           // KEY
-    private Date releaseDate;
+    private LocalDate releaseDate;
     private String rating;
     private String directorName;
     private String studio;
@@ -32,11 +31,11 @@ public class DVD {
         this.title = title;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
