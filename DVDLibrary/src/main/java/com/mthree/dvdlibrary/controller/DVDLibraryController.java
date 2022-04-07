@@ -68,7 +68,6 @@ public class DVDLibraryController {
         return view.printMenuAndGetSelection();
     }
 
-    // for exception testing.
     void addDVD() throws DVDLibraryDaoException {
         boolean keepGoing = true;
 
