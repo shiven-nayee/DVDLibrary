@@ -78,31 +78,45 @@ public class DVDLibraryController {
             dao.addDVD(newDVD);
             view.displayCreateSuccessBanner();
 
-            keepGoing = view.doContinue("Press 'Y' or 'y' to add more DVD");
+            keepGoing = view.canContinue("Press 'Y' or 'y' to add more DVD. Press enter to exit");
         }
     }
 
     void removeDVD() throws DVDLibraryDaoException {
-        view.displayRemoveDVDBanner();
-        String title = view.getDVDTitle();
-        DVD removedDVD = dao.removeDVD(title);
-        view.displayRemoveResult(removedDVD);
+        boolean keepGoing = true;
+
+        while (keepGoing) {
+            view.displayRemoveDVDBanner();
+            String title = view.getDVDTitle();
+            DVD removedDVD = dao.removeDVD(title);
+            view.displayRemoveResult(removedDVD);
+
+            keepGoing = view.canContinue("Press 'Y' or 'y' to remove more DVD. Press enter to exit");
+        }
     }
 
     void editDVDInformation() throws DVDLibraryDaoException {
+        boolean keepGoing = true;
+
         view.displayEditDVDBanner();
-        String title = view.getDVDTitle();
-        DVD dvdForEditing = dao.getDVD(title);
 
-        view.displayDVD(dvdForEditing);
-        boolean isUpdated = view.displayEditDVDMenu(dvdForEditing);
+        while (keepGoing) {
+            String title = view.getDVDTitle();
+            DVD dvdForEditing = dao.getDVD(title);
+            view.displayDVD(dvdForEditing);
 
-        if (isUpdated) {
-            dao.removeDVD(title);
-            dao.addDVD(dvdForEditing);
-            view.displayEditResult(dvdForEditing);
-        } else {
-            view.displayEditDVDMenu(null);
+            if (dvdForEditing != null) {
+                boolean isUpdated = view.displayEditDVDMenu(dvdForEditing);
+
+                if (isUpdated) {
+                    dao.removeDVD(title);
+                    dao.addDVD(dvdForEditing);
+                    view.displayEditResult(dvdForEditing);
+                } else {
+                    view.displayEditResult(null);
+                }
+            }
+            keepGoing = view.canContinue("Press 'Y' or 'y' to edit other DVD. Press enter to exit");
         }
     }
 

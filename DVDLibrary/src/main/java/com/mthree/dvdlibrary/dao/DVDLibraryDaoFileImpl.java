@@ -42,11 +42,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
     public List<DVD> listDVDs() throws DVDLibraryDaoException {
         loadDVD();
 
-//        System.out.println("DVDs in the list");
         Collection<DVD> allDvds = DVDLibrary.values();
-//        for(String title : AllTitles) {
-//            System.out.println(title);
-//        }
         return new ArrayList(allDvds);
     }
 
@@ -82,11 +78,11 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
     public void getDVDInformation(String title) throws DVDLibraryDaoException {
         loadDVD();
         DVD d = DVDLibrary.get(title);
-        System.out.println("Title: " + d.getTitle());
-        System.out.println("Director: " + d.getDirectorName());
-        System.out.println("Rating: " + d.getRating());
-        System.out.println("Studio: " + d.getStudio());
-        System.out.println("User rating: " + d.getUserRating());
+//        System.out.println("Title: " + d.getTitle());
+//        System.out.println("Director: " + d.getDirectorName());
+//        System.out.println("Rating: " + d.getRating());
+//        System.out.println("Studio: " + d.getStudio());
+//        System.out.println("User rating: " + d.getUserRating());
     }
 
         // deserialize a String to DVD object

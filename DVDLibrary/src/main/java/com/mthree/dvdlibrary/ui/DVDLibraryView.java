@@ -50,17 +50,16 @@ public class DVDLibraryView {
 
     public void displayDVD(DVD dvd) {
         if (dvd != null) {
-            io.print(dvd.getTitle());
-            io.print(dvd.getReleaseDate());
-            io.print(dvd.getRating());
-            io.print(dvd.getDirectorName());
-            io.print(dvd.getStudio());
-            io.print(dvd.getUserRating());
-            io.print("");
+            io.print("DVD Title      : " + dvd.getTitle());
+            io.print("Release Date   : " + dvd.getReleaseDate());
+            io.print("MPAA rating    : " + dvd.getRating());
+            io.print("Director's name: " + dvd.getDirectorName());
+            io.print("Studio         : " + dvd.getStudio());
+            io.print("User rating    : " + dvd.getUserRating());
         } else {
             io.print("No such DVD.");
         }
-        io.readString("Please hit enter to continue.");
+        io.print("");
     }
 
     public void displayDVDList(List<DVD> dvdList) {
@@ -149,7 +148,7 @@ public class DVDLibraryView {
         io.print("=== DVD successfully created ===");
     }
 
-    public boolean doContinue(String msg) {
+    public boolean canContinue(String msg) {
         String userReply = io.readString(msg);
 
         return userReply != null && userReply.toUpperCase().equals("Y");
@@ -195,7 +194,6 @@ public class DVDLibraryView {
         }else{
             io.print("DVD update not saved.");
         }
-        io.readString("Please hit enter to continue.");
     }
 
     public void displayRemoveResult(DVD dvd) {
@@ -204,7 +202,6 @@ public class DVDLibraryView {
         }else{
             io.print("No such DVD.");
         }
-        io.readString("Please hit enter to continue.");
     }
 
     public void displayExitBanner() {

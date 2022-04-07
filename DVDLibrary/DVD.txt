@@ -1,3 +1,3 @@
-Star Wars::1972-05-17::PG-13::George::ABC::Good & Fun
-Test::1972::PG-13::Test::aaa::good
+Star Wars::1972-05-17::PG-13::George::ABC::It's fun.
+Test::1972::PG-13::Test::ABC Studio::good
 new2 title::2222-22-22::pg-13::1::1::good
