@@ -146,8 +146,13 @@ public class DVDLibraryView {
     }
 
     public void displayCreateSuccessBanner() {
-        io.readString(
-                "DVD successfully created.  Please hit enter to continue");
+        io.print("=== DVD successfully created ===");
+    }
+
+    public boolean doContinue(String msg) {
+        String userReply = io.readString(msg);
+
+        return userReply != null && userReply.toUpperCase().equals("Y");
     }
 
     public void displayDisplayAllBanner() {
